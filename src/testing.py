@@ -5,23 +5,63 @@ import mysql.connector as mysql
 
 LARGEFONT =("Arial", 45)
 
-# Functions
+db = mysql.connect(
+    host = "localhost",
+    user = "root",
+    passwd = "Kobebryant24",
+    database = "NBA"
+)
+
+mycursor = db.cursor()
+
+#############
+# Functions #
+#############
+
 def add(indicator):
     if indicator == 1: # If from Player
         answer = simpledialog.askstring("Input", "Insert:\n\nPlayer Name\nAge\nWeight\nHeight\nTotal Points\nTotal Assists\nTotal Rebounds\nTotal Steals\nTotal Blocks\nTotal Turnovers\nTeam\n\nCOMMA SEPARATED")
-        print(answer)
+        
+        answer_to_tuple = tuple(answer.split(", "))
+        sql = "INSERT INTO Players (player_name, player_age, player_weight, player_height, player_points, player_assists, player_rebounds, player_steals, player_blocks, player_turnovers, player_team) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+
+        mycursor.execute(sql, answer_to_tuple)
+        db.commit()
+
     elif indicator == 2: # If from Team
         answer = simpledialog.askstring("Input", "Insert:\n\nTeam Name\nWins\nLoses\nLocation\nYear Founded\nTotal Championships\nTeam Conference\nTeam Division\n\nCOMMA SEPARATED")
-        print(answer)
+
+        answer_to_tuple = tuple(answer.split(", "))
+        sql = "INSERT INTO Teams (team_name, team_wins, team_losses, team_location, year_founded, team_championships, team_conference, team_division) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+
+        mycursor.execute(sql, answer_to_tuple)
+        db.commit()
     elif indicator == 3: # If from Division
         answer = simpledialog.askstring("Input", "Insert:\n\nDivision Name\nDivison Wins\nDivision Losses\nDivision Conference\n\nCOMMA SEPARATED")
-        print(answer)
+        
+        answer_to_tuple = tuple(answer.split(", "))
+        sql = "INSERT INTO Divisions (division_name, division_wins, division_losses, division_conference) VALUES (%s, %s, %s, %s)"
+
+        mycursor.execute(sql, answer_to_tuple)
+        db.commit()
     elif indicator == 4: # If from Conference
-        answer = simpledialog.askstring("Input", "Insert:\n\nConference Name\nConference Wins\nConference Losses\nDivision Conference\n\nCOMMA SEPARATED")
-        print(answer)
+        answer = simpledialog.askstring("Input", "Insert:\n\nConference Name\nConference Wins\nConference Losses\n\nCOMMA SEPARATED")
+        
+        answer_to_tuple = tuple(answer.split(", "))
+        sql = "INSERT INTO Conferences (conference_name, conference_wins, conference_losses) VALUES (%s, %s, %s)"
+
+        mycursor.execute(sql, answer_to_tuple)
+        db.commit()
     else: # If from Draft
-        answer = simpledialog.askstring("Input", "Insert:\n\nDraft Pick Overall\nDraft Pick Round Relative\nDraft Pick Around\nDraft Year\nPlayer Team\nPlayer Age\nPlayer Weight\nPlayer Height\n\nCOMMA SEPARATED")
-        print(answer)
+        answer = simpledialog.askstring("Input", "Insert:\n\nDraft Pick Overall\nDraft Pick Round Relative\nDraft Pick Round\nDraft Year\nPlayer Team\nPlayer Name\nPlayer Age\nPlayer Weight\nPlayer Height\n\nCOMMA SEPARATED")
+        
+        answer_to_tuple = tuple(answer.split(", "))
+        sql = "INSERT INTO Draft_2020 (draft_pick_overall, draft_pick_round_relative, draft_pick_round, draft_year, player_team, player_name, player_age, player_weight, player_height) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+
+        mycursor.execute("SET foreign_key_checks = 0")
+        mycursor.execute(sql, answer_to_tuple)
+        db.commit()
+
 def remove(indicator):
     if indicator == 1: # If from Player
         answer = simpledialog.askstring("Input", "Insert:\n\nPlayer Name\n\nCOMMA SEPARATED")
@@ -60,7 +100,9 @@ def submit(queryName):
     query = queryName.get()
     print("here it is", query)
 
-
+#########
+# Pages #
+#########
 class Application(tk.Tk):
      
     def __init__(self, *args, **kwargs):
@@ -239,7 +281,9 @@ class Edit(tk.Frame):
         conference_button.place(relx = 0.6, rely = 0.5)
         draft_player_button.place(relx = 0.75, rely = 0.5)
 
-# Driver Code
+##########
+# Driver #
+##########
 app = Application()
 app.mainloop()
 
