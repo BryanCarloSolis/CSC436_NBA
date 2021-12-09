@@ -231,7 +231,7 @@ class Guest(tk.Frame):
         tk.Frame.__init__(self, parent)
         queryName = tk.StringVar()
 
-        queryLabel = tk.Label(self, text = "Enter your query here: ", )#login has to be the name of the master window
+        queryLabel = tk.Label(self, text = "Enter your query here: ", )
         queryLabel.place(x = 310, y = 40)
 
         queryEntrySpace = tk.Entry(self, textvariable = queryName, width = 35)
@@ -240,6 +240,9 @@ class Guest(tk.Frame):
         submitbtn = tk.Button(self, text = "Submit", command = lambda: submit(queryName))
         submitbtn.place(x = 340, y = 110, width = 75)
 
+        back_button = tk.Button(self, text = "Back", bg = 'red', width = 5, height = 2, 
+        command = lambda : controller.show_frame(Launch))
+        #No placement for these buttons?
   
 # Admin Page
 class Admin(tk.Frame):
@@ -256,10 +259,14 @@ class Admin(tk.Frame):
         edit_button = tk.Button(self, text = "Edit", bg = 'red', width = 5, height = 2,
         command = lambda : controller.show_frame(Edit))
 
+        back_button = tk.Button(self, text = "Back", bg = 'red', width = 5, height = 2, 
+        command = lambda : controller.show_frame(Launch))
+
         # Placement
         add_button.place(relx = 0.25, rely = 0.5)
         remove_button.place(relx = 0.45, rely = 0.5)
         edit_button.place(relx = 0.65, rely = 0.5)
+        #Add 'Back' button
 
 # Guest page
 class Add(tk.Frame):
@@ -283,6 +290,9 @@ class Add(tk.Frame):
     
         draft_player_button = tk.Button(self, text = "Draft Player", bg = 'red', width = 5, height = 2, 
         command = lambda : add(5))
+
+        back_button = tk.Button(self, text = "Back", bg = 'red', width = 5, height = 2, 
+        command = lambda : controller.show_frame(Admin))
         
         # Placement
         player_button.place(relx = 0.15, rely = 0.5)
@@ -290,6 +300,7 @@ class Add(tk.Frame):
         division_button.place(relx = 0.45, rely = 0.5)
         conference_button.place(relx = 0.6, rely = 0.5)
         draft_player_button.place(relx = 0.75, rely = 0.5)
+        #Add 'Back' button
 
 
 class Remove(tk.Frame):
@@ -314,12 +325,16 @@ class Remove(tk.Frame):
         draft_player_button = tk.Button(self, text = "Draft Player", bg = 'red', width = 5, height = 2, 
         command = lambda : remove(5))
 
+        back_button = tk.Button(self, text = "Back", bg = 'red', width = 5, height = 2, 
+        command = lambda : controller.show_frame(Admin))
+
         # Placement
         player_button.place(relx = 0.15, rely = 0.5)
         team_button.place(relx = 0.3, rely = 0.5)
         division_button.place(relx = 0.45, rely = 0.5)
         conference_button.place(relx = 0.6, rely = 0.5)
         draft_player_button.place(relx = 0.75, rely = 0.5)
+        #Add 'Back' button
 
 
 class Edit(tk.Frame):
@@ -343,6 +358,9 @@ class Edit(tk.Frame):
     
         draft_player_button = tk.Button(self, text = "Draft Player", bg = 'red', width = 5, height = 2, 
         command = lambda : edit(5))
+
+        back_button = tk.Button(self, text = "Back", bg = 'red', width = 5, height = 2, 
+        command = lambda : controller.show_frame(Admin))
         
         # Placement
         player_button.place(relx = 0.15, rely = 0.5)
@@ -350,6 +368,7 @@ class Edit(tk.Frame):
         division_button.place(relx = 0.45, rely = 0.5)
         conference_button.place(relx = 0.6, rely = 0.5)
         draft_player_button.place(relx = 0.75, rely = 0.5)
+        #Add 'Back' button
 
 ##########
 # Driver #
