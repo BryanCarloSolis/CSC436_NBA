@@ -14,6 +14,16 @@ db = mysql.connect(
 
 mycursor = db.cursor()
 
+###############
+# Test Inputs #
+###############
+# Bryan Solis, 20, 220, 70, 2000, 3000, 1000, 200, 300, 100, Boston Celtics
+# Seattle Supersonics, 50, 32, Seattle, 1996, 0, West, Pacific
+# Brook Lopez
+# Chicago Bulls
+# age, 35, Al Horford
+# wins, 67, Golden State Warriors
+
 #############
 # Functions #
 #############
@@ -235,7 +245,6 @@ def search(queryName):
         for i, (draft_pick_overall, draft_pick_round_relative, draft_pick_round, draft_year, player_team, player_name, player_age, player_weight, player_height) in enumerate(records, start=1):
             listBox.insert("", "end", values=(draft_pick_overall, draft_pick_round_relative, draft_pick_round, draft_year, player_team, player_name, player_age, player_weight, player_height))
     
-    mycursor.execute("SELECT id,stname,course,fee FROM record")
 
 
 
