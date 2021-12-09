@@ -1,3 +1,4 @@
+'''
 from tkinter import *
 import tkinter as tk
 from tkinter import ttk
@@ -32,7 +33,7 @@ def submit():
 
 #def login(user, password):
     
-'''
+
 db = mysql.connect(
     host = "localhost",
     user = "root",
@@ -45,3 +46,6 @@ mycursor.execute("select * from Divisions")
 for i in mycursor:
     print(i)
 '''
+answer_to_tuple = ()
+answer_to_tuple = answer_to_tuple + ("test", )
+print(answer_to_tuple[0])
